@@ -1,8 +1,4 @@
-# PPP_generate:density, scope 입력하면 좌표 생성
-# BSAntenna: Base Station 안테나
-# UEAntenna: User Equipment 안테나
 import numpy as np
-# import math
 
 
 def ppp_generate(ppp_density, low_x, high_x, low_y, high_y):
@@ -14,6 +10,3 @@ def ppp_generate(ppp_density, low_x, high_x, low_y, high_y):
 
     node_coordinate = [tmp_x, tmp_y]
     return node_coordinate
-
-# a= ppp_generate(2*math.pow(10, -4), 0,1000,0,1000)
-# print(a[0])
