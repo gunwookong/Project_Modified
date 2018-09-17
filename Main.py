@@ -1,24 +1,32 @@
+# Last Modified: 18/09/17
 import math
 import matplotlib.pyplot as plt
-from User_Path import user_path
+
+from UE_random_walk import random_walk
 from PPP_Generate import ppp_generate
+from Blockage import blockage
 
-# Base Station and Obstacle density
-BS_density = 2*math.pow(10, -5)
-OBS_density = 2*math.pow(10, -4)
+# Define Base Station and Blockage Density
+BS_density = 2*math.pow(10, -6)
+BLOC_density = 2*math.pow(10, -6)
 
-# function call
-coordinate_BS = ppp_generate(BS_density, 0, 1000, 0, 1000)
+# Make Random Coordinates of Base Station and Blockage
+coordinate_BS = ppp_generate(BS_density, 0, 3000, 0, 3000)
 plt.scatter(coordinate_BS[0], coordinate_BS[1], marker='x', color='orange', label='Base_Station')
-coordinate_OBS = ppp_generate(OBS_density, 0, 1000, 0, 1000)
-plt.scatter(coordinate_OBS[0], coordinate_OBS[1], marker='.', color='blue', label='Obstacle')
 
-coordinate_UE = user_path(0, 1000)
-plt.scatter(coordinate_UE[0], coordinate_UE[1], marker='>', color='red', label='User_Path')
+coordinate_BLOC = ppp_generate(BLOC_density, 0, 3000, 0, 3000)
+plt.scatter(coordinate_BLOC[0], coordinate_BLOC[1], marker='.', color='blue', label='Obstacle')
 
-# function label
-plt.xlabel('x axis')
-plt.ylabel('y axis')
-plt.title('User Equipment Path With BS & Obs')
+# Make Line-segment Blockage from coordinate_BLK
+Line_BLOC = blockage(coordinate_BLOC)
+
+# User Equipment's Random Walk
+coordinate_UE = random_walk(3000, 3000, 100, 50)
+plt.plot(coordinate_UE[0], coordinate_UE[1], color='gray', linewidth=1, label='User_Path')
+
+# Function Label
+plt.xlabel('x axis(m)')
+plt.ylabel('y axis(m)')
+plt.title('User Equipment Path with Base Station and Blockage')
 plt.legend(loc='upper right')
 plt.show()

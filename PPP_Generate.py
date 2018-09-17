@@ -1,4 +1,9 @@
+# Last Modified: 18/09/17
 import numpy as np
+
+# Poisson point process(ppp)_generating function
+# Input: Density & Range of area
+# Output: Randomly Scattered Coordinates Following Poisson Distribution
 
 
 def ppp_generate(ppp_density, low_x, high_x, low_y, high_y):
