@@ -99,9 +99,9 @@ def random_walk(max_x, max_y, num, one_step):
 
     node_coordinate = [x, y]
 
-    # Print Coordinates
+    """ Print Coordinates
     for k in range(0, num):
-        print(k+1, "th (x,y)=", "(", x[k], ",", y[k], ")")
+        print(k+1, "th (x,y)=", "(", x[k], ",", y[k], ")")"""
     plt.scatter(x[num-1], y[num-1], marker='s', color='red', label='Finishing point')
 
     return node_coordinate
