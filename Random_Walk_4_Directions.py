@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # Output: Random Sequential Walk in Even Strides
 
 
-def random_walk(max_x, max_y, num, one_step):
+def random_walk_4_directions(max_x, max_y, num, one_step):
     # Generate number of steps and starting point
     x = np.zeros(num)
     y = np.zeros(num)
@@ -97,11 +97,9 @@ def random_walk(max_x, max_y, num, one_step):
                 a = True
                 i = i + 1
 
-    node_coordinate = [x, y]
-
-    """ Print Coordinates
-    for k in range(0, num):
-        print(k+1, "th (x,y)=", "(", x[k], ",", y[k], ")")"""
+    node_x = x.tolist()
+    node_y = y.tolist()
+    node_coordinate = [node_x, node_y]
     plt.scatter(x[num-1], y[num-1], marker='s', color='red', label='Finishing point')
 
     return node_coordinate
