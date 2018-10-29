@@ -1,39 +1,37 @@
-# Last Modified: 18/09/17
+# Last Modified: 18/10/29
+# To Make Line Segment Blockage,
+# Make Both Ends'-Coordinates are following Uniform distribution
+
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-# To Make Line Segment Blockage,
-# Make Both Ends'-Coordinates are following Uniform distribution
 
+def line_blockage_generate(cen_bloc):
+    bloc1_x = np.zeros(len(cen_bloc[0]))
+    bloc1_y = np.zeros(len(cen_bloc[0]))
+    bloc2_x = np.zeros(len(cen_bloc[0]))
+    bloc2_y = np.zeros(len(cen_bloc[0]))
 
-def line_blockage_generate(coordinate_center_bloc):
-    bloc1_x = np.zeros(len(coordinate_center_bloc[0]))
-    bloc1_y = np.zeros(len(coordinate_center_bloc[0]))
-    bloc2_x = np.zeros(len(coordinate_center_bloc[0]))
-    bloc2_y = np.zeros(len(coordinate_center_bloc[0]))
-
-    for i in range(0, len(coordinate_center_bloc[0])):
-
-        # Unit Random Blockage Length (min, max, num) Follows Uniform Distribution
-        length = np.random.uniform(30, 100, 1)
-        # Random Blockage angle (min, max, num) Also Follows Uniform Distribution
+    for i in range(0, len(cen_bloc[0])):
+        # Make unit random blockage length (min, max, size) following uniform distribution
+        length = np.random.uniform(0, 85/2, 1)  # Maximum half length of blockage is 85/2
+        # Random blockage angle (min, max, size) also follows uniform distribution
         angle = np.random.uniform(0, math.pi, 1)
 
-        # make both ends' coordinates
-        bloc1_x[i] = (coordinate_center_bloc[0][i] + length * math.cos(angle))
-        bloc1_y[i] = (coordinate_center_bloc[1][i] + length * math.sin(angle))
-        bloc2_x[i] = (coordinate_center_bloc[0][i] - length * math.cos(angle))
-        bloc2_y[i] = (coordinate_center_bloc[1][i] - length * math.sin(angle))
+        bloc1_x[i] = (cen_bloc[0][i] + length * math.cos(angle))  # Make both ends' coordinates
+        bloc1_y[i] = (cen_bloc[1][i] + length * math.sin(angle))
+        bloc2_x[i] = (cen_bloc[0][i] - length * math.cos(angle))
+        bloc2_y[i] = (cen_bloc[1][i] - length * math.sin(angle))
 
-    # Plot Line Segment Blockage for each Coordinates
-    plt.plot([bloc1_x, bloc2_x], [bloc1_y, bloc2_y], color='blue')
-    end_of_bloc1_x = bloc1_x.tolist()
-    end_of_bloc1_y = bloc1_y.tolist()
-    end_of_bloc2_x = bloc2_x.tolist()
-    end_of_bloc2_y = bloc2_y.tolist()
-    end_of_bloc1 = [end_of_bloc1_x, end_of_bloc1_y]
-    end_of_bloc2 = [end_of_bloc2_x, end_of_bloc2_y]
-    coordinate_line_blockage = [coordinate_center_bloc, end_of_bloc1, end_of_bloc2]
+    plt.plot([bloc1_x, bloc2_x], [bloc1_y, bloc2_y], color='dimgray', linewidth='1.2')  # Plot line segment blockages
+    plt.plot([bloc1_x[0], bloc2_x[0]], [bloc1_y[0], bloc2_y[0]], color='dimgray', linewidth='1.2', label='Blockage')
+    end_bloc1_x = bloc1_x.tolist()
+    end_bloc1_y = bloc1_y.tolist()
+    end_bloc2_x = bloc2_x.tolist()
+    end_bloc2_y = bloc2_y.tolist()
+    end_bloc1 = [end_bloc1_x, end_bloc1_y]
+    end_bloc2 = [end_bloc2_x, end_bloc2_y]
+    line_bloc_coords = [cen_bloc, end_bloc1, end_bloc2]
 
-    return coordinate_line_blockage
+    return line_bloc_coords  # [0]: Cen, [1]: End1, [2]: End2
